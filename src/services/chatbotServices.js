@@ -162,9 +162,8 @@ let reply = async (message) => {
 
 	const options = {
 		method: "GET",
-		mode: "cors",
 		headers: {
-			"content-type": "application/json;charset=utf-8",
+			"Content-Type": "text/plain;charset=UTF-8",
 		},
 	};
 	let response;
