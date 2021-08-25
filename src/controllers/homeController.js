@@ -12,8 +12,6 @@ let callSendAPI = async (sender_psid, response) => {
 		},
 		message: response,
 	};
-	await chatbotServices.sendTypingOn(sender_psid);
-	await chatbotServices.sendMarkReadMessage(sender_psid);
 
 	// Send the HTTP request to the Messenger Platform
 	request(
@@ -95,6 +93,8 @@ async function handleMessage(sender_psid, received_message) {
 
 	// Checks if the message contains text
 	if (received_message.text) {
+		await chatbotServices.sendTypingOn(sender_psid);
+		await chatbotServices.sendMarkReadMessage(sender_psid);
 		response = await chatbotServices.reply(received_message.text);
 		// Create the payload for a basic text message, which
 		// will be added to the body of our request to the Send API
