@@ -168,7 +168,11 @@ let reply = async (message) => {
 				});
 				// The whole response has been received. Print out the result.
 				resp.on("end", () => {
-					console.log(JSON.parse(data));
+					let parsed_data = JSON.parse(data);
+					let response = {
+						text: parsed_data.successs,
+					};
+					return response;
 				});
 			}
 		)
