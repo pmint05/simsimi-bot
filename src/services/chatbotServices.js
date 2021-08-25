@@ -157,33 +157,25 @@ let getStartTemplate = (username) => {
 	return response;
 };
 let reply = async (message) => {
-	return new Promise(async (resolve, reject) => {
-		try {
-			await request(
-				{
-					uri: `https://api.simsimi.net/v1/`,
-					qs: { text: message, lang: "vi_VN" },
-					method: "GET",
-				},
-				(err, res, body) => {
-					console.log(body);
-					if (!err) {
-						console.log("succeeds!");
-						let respone = {
-							text: body.success,
-						};
-
-						resolve("done");
-						return respone;
-					} else {
-						console.error("Error :" + err);
-					}
-				}
-			);
-		} catch (e) {
-			reject(e);
+	await request(
+		{
+			uri: `https://api.simsimi.net/v1/`,
+			qs: { text: message, lang: "vi_VN" },
+			method: "GET",
+		},
+		(err, res, body) => {
+			console.log(body);
+			if (!err) {
+				console.log("succeeds!");
+				let respone = {
+					text: body.success,
+				};
+				return respone;
+			} else {
+				console.error("Error :" + err);
+			}
 		}
-	});
+	);
 };
 
 module.exports = {
