@@ -158,10 +158,11 @@ let getStartTemplate = (username) => {
 	return response;
 };
 let reply = async (message) => {
+	let url = utf8.encode(
+		`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`
+	);
 	let response;
-	await fetch(
-		utf8.encode(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`)
-	)
+	await fetch(url)
 		.then((res) => res.json())
 		.then((data) => {
 			console.log(data);
