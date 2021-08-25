@@ -158,7 +158,11 @@ let getStartTemplate = (username) => {
 };
 let reply = async (message) => {
 	let response;
-	await fetch(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`)
+	await fetch(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`, {
+		headers: {
+			"User-Agent": "ANYTHING_WILL_WORK_HERE",
+		},
+	})
 		.then((res) => res.json())
 		.then((data) => {
 			console.log(data);
