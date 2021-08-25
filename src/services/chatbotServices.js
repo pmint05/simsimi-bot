@@ -2,6 +2,7 @@ require("dotenv").config();
 import { response } from "express";
 import request from "request";
 const fetch = require("node-fetch");
+import utf8 from "utf8";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const IMAGE_GET_STARTED = "https://i.postimg.cc/rs93Bgqg/avt-remake.png";
 
@@ -158,11 +159,9 @@ let getStartTemplate = (username) => {
 };
 let reply = async (message) => {
 	let response;
-	await fetch(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`, {
-		headers: {
-			"User-Agent": "ANYTHING_WILL_WORK_HERE",
-		},
-	})
+	await fetch(
+		utf8.encode(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`)
+	)
 		.then((res) => res.json())
 		.then((data) => {
 			console.log(data);
