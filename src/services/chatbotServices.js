@@ -156,10 +156,28 @@ let getStartTemplate = (username) => {
 	};
 	return response;
 };
+let reply = async (message) => {
+	await request(
+		{
+			uri: `https://api.simsimi.net/v1/`,
+			qs: { text: message, lang: "vi_VN" },
+			method: "GET",
+		},
+		(err, res, body) => {
+			console.log(body);
+			if (!err) {
+				console.log("succeeds!");
+			} else {
+				console.error("Error :" + err);
+			}
+		}
+	);
+};
 module.exports = {
 	handleGetStarted: handleGetStarted,
 	callSendAPI: callSendAPI,
 	getUserName: getUserName,
 	sendTypingOn: sendTypingOn,
 	sendMarkReadMessage: sendMarkReadMessage,
+	reply: reply,
 };
