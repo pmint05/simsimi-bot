@@ -157,9 +157,15 @@ let getStartTemplate = (username) => {
 	return response;
 };
 let reply = async (message) => {
+	let response;
 	await fetch(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`)
 		.then((res) => res.json())
-		.then((data) => console.log(data));
+		.then((data) => {
+			console.log(data);
+			response = data.success;
+		});
+	return response;
+
 	// await request(
 	// 	{
 	// 		uri: `https://api.simsimi.net/v1/`,
