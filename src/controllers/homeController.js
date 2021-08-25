@@ -94,7 +94,7 @@ async function handleMessage(sender_psid, received_message) {
 
 	// Checks if the message contains text
 	if (received_message.text) {
-		await chatbotServices.reply(sender_psid, received_message.text);
+		response = await chatbotServices.reply(received_message.text);
 		// Create the payload for a basic text message, which
 		// will be added to the body of our request to the Send API
 	} else if (received_message.attachments) {
