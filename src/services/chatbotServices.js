@@ -159,7 +159,7 @@ let getStartTemplate = (username) => {
 let reply = async (message) => {
 	https
 		.get(
-			`https://api.simsimi.net/v1/?text${message}&lang=vi_VN`,
+			`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`,
 			(resp) => {
 				let data = "";
 				// A chunk of data has been recieved.
@@ -168,7 +168,7 @@ let reply = async (message) => {
 				});
 				// The whole response has been received. Print out the result.
 				resp.on("end", () => {
-					console.log(JSON.parse(data).explanation);
+					console.log(data);
 				});
 			}
 		)
