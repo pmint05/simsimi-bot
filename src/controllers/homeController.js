@@ -136,7 +136,7 @@ async function handleMessage(sender_psid, received_message) {
 	}
 
 	// Send the response message
-	await callSendAPI(sender_psid, response);
+	callSendAPI(sender_psid, response);
 }
 
 // Handles messaging_postbacks events

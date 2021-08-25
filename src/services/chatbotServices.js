@@ -1,7 +1,7 @@
 require("dotenv").config();
 import { response } from "express";
 import request from "request";
-const https = require("https");
+const fetch = require("node-fetch");
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const IMAGE_GET_STARTED = "https://i.postimg.cc/rs93Bgqg/avt-remake.png";
 
@@ -157,28 +157,9 @@ let getStartTemplate = (username) => {
 	return response;
 };
 let reply = async (message) => {
-	https
-		.get(
-			`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`,
-			(resp) => {
-				let data = "";
-				// A chunk of data has been recieved.
-				resp.on("data", (chunk) => {
-					data += chunk;
-				});
-				// The whole response has been received. Print out the result.
-				resp.on("end", () => {
-					let parsed_data = JSON.parse(data);
-					let response = {
-						text: parsed_data.successs,
-					};
-					return response;
-				});
-			}
-		)
-		.on("error", (err) => {
-			console.log("Error: " + err.message);
-		});
+	await fetch(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`)
+		.then((res) => res.json())
+		.then((data) => console.log(text));
 	// await request(
 	// 	{
 	// 		uri: `https://api.simsimi.net/v1/`,
