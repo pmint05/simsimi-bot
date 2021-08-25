@@ -1,7 +1,8 @@
 require("dotenv").config();
 import request from "request";
+import chatbotServices from "../services/chatbotServices";
 
-function callSendAPI(sender_psid, response) {
+async function callSendAPI(sender_psid, response) {
 	// Construct the message body
 	let request_body = {
 		recipient: {
@@ -9,6 +10,8 @@ function callSendAPI(sender_psid, response) {
 		},
 		message: response,
 	};
+	await chatbotServices.sendTypingOn(sender_psid);
+	await chatbotServices.sendMarkReadMessage(sender_psid);
 
 	// Send the HTTP request to the Messenger Platform
 	request(
@@ -131,10 +134,108 @@ function handleMessage(sender_psid, received_message) {
 }
 
 // Handles messaging_postbacks events
-function handlePostback(sender_psid, received_postback) {}
+async function handlePostback(sender_psid, received_postback) {
+	let response;
+
+	// Get the payload for the postback
+	let payload = received_postback.payload;
+
+	// Set the response based on the postback payload
+	switch (payload) {
+		case "yes":
+			response = { text: "Thanks!" };
+			break;
+		case "no":
+			response = { text: "Oops, try sending another image." };
+			break;
+		case "RESTART_CHATBOT":
+		case "GET_STARTED":
+			await chatbotServices.handleGetStarted(sender_psid);
+			break;
+		default:
+			response = { text: `Oops, Xin lỗi tôi không hiểu ${payload}` };
+	}
+
+	// Send the message to acknowledge the postback
+	callSendAPI(sender_psid, response);
+}
+let setupProfile = async (req, res) => {
+	//call profile facebook api
+	// Construct the message body
+	let request_body = {
+		get_started: { payload: "GET_STARTED" },
+		whitelisted_domains: ["https://simsimi-pmint05.herokuapp.com/"],
+	};
+
+	// Send the HTTP request to the Messenger Platform
+	await request(
+		{
+			uri: `https://graph.facebook.com/v11.0/me/messenger_profile`,
+			qs: { access_token: PAGE_ACCESS_TOKEN },
+			method: "POST",
+			json: request_body,
+		},
+		(err, res, body) => {
+			console.log(body);
+			if (!err) {
+				console.log("Setup user profile succeeds!");
+			} else {
+				console.error("Unable to setup:" + err);
+			}
+		}
+	);
+
+	return res.send("Setup user profile succeeds!");
+};
+let setupPersistentMenu = async (req, res) => {
+	//call profile facebook api
+	// Construct the message body
+	let request_body = {
+		persistent_menu: [
+			{
+				locale: "default",
+				composer_input_disabled: false,
+				call_to_actions: [
+					{
+						type: "web_url",
+						title: "AUTHOR",
+						url: "fb.com/pmint05/",
+					},
+					// {
+					// 	type: "postback",
+					// 	title: "Khởi động lại bot",
+					// 	payload: "RESTART_CHATBOT",
+					// },
+				],
+			},
+		],
+	};
+
+	// Send the HTTP request to the Messenger Platform
+	await request(
+		{
+			uri: `https://graph.facebook.com/v11.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+			qs: { access_token: PAGE_ACCESS_TOKEN },
+			method: "POST",
+			json: request_body,
+		},
+		(err, res, body) => {
+			console.log(body);
+			if (!err) {
+				console.log("Setup persistent menu succeeds!");
+			} else {
+				console.error("Unable to setup:" + err);
+			}
+		}
+	);
+
+	return res.send("Setup persistent menu succeeds!");
+};
 
 module.exports = {
 	getHomePage: getHomePage,
 	postWebhook: postWebhook,
 	getWebhook: getWebhook,
+	setupProfile: setupProfile,
+	setupPersistentMenu: setupPersistentMenu,
 };
