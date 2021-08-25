@@ -168,7 +168,7 @@ let reply = async (message) => {
 				});
 				// The whole response has been received. Print out the result.
 				resp.on("end", () => {
-					console.log(data);
+					console.log(typeof data);
 				});
 			}
 		)
