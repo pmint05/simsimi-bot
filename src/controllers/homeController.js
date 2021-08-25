@@ -2,6 +2,8 @@ require("dotenv").config();
 import request from "request";
 import chatbotServices from "../services/chatbotServices";
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
 async function callSendAPI(sender_psid, response) {
 	// Construct the message body
 	let request_body = {
