@@ -3,6 +3,7 @@ import { response } from "express";
 import request from "request";
 const fetch = require("node-fetch");
 import utf8 from "utf8";
+import { URL } from "url";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const IMAGE_GET_STARTED = "https://i.postimg.cc/rs93Bgqg/avt-remake.png";
 
@@ -158,7 +159,7 @@ let getStartTemplate = (username) => {
 	return response;
 };
 let reply = async (message) => {
-	let url = `https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`;
+	let url = new URL(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`);
 
 	const options = {
 		method: "GET",
