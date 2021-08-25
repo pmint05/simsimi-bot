@@ -169,17 +169,17 @@ let reply = async (message) => {
 					console.log(body);
 					if (!err) {
 						console.log("succeeds!");
+						let respone = {
+							text: body.success,
+						};
+
+						resolve("done");
+						return respone;
 					} else {
 						console.error("Error :" + err);
 					}
 				}
 			);
-			let respone = {
-				text: body.success,
-			};
-
-			resolve("done");
-			return respone;
 		} catch (e) {
 			reject(e);
 		}
