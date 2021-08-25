@@ -156,42 +156,36 @@ let getStartTemplate = (username) => {
 	};
 	return response;
 };
-let reply = async (sender_psid, message) => {
+let reply = async (message) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			let response = getApi(message);
-
-			//send generic template message
-			await callSendAPI(sender_psid, response);
+			await request(
+				{
+					uri: `https://api.simsimi.net/v1/`,
+					qs: { text: message, lang: "vi_VN" },
+					method: "GET",
+				},
+				(err, res, body) => {
+					console.log(body);
+					if (!err) {
+						console.log("succeeds!");
+					} else {
+						console.error("Error :" + err);
+					}
+				}
+			);
+			let respone = {
+				text: body.success,
+			};
 
 			resolve("done");
+			return respone;
 		} catch (e) {
 			reject(e);
 		}
 	});
 };
-let getApi = async (message) => {
-	let respone;
-	await request(
-		{
-			uri: `https://api.simsimi.net/v1/`,
-			qs: { text: message, lang: "vi_VN" },
-			method: "GET",
-		},
-		(err, res, body) => {
-			console.log(body);
-			if (!err) {
-				console.log("succeeds!");
-			} else {
-				console.error("Error :" + err);
-			}
-		}
-	);
-	respone = {
-		text: body.success,
-	};
-	return respone;
-};
+
 module.exports = {
 	handleGetStarted: handleGetStarted,
 	callSendAPI: callSendAPI,
