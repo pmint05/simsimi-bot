@@ -157,6 +157,23 @@ let getStartTemplate = (username) => {
 	return response;
 };
 let reply = async (sender_psid, message) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = getApi();
+
+			//send generic template message
+			await callSendAPI(sender_psid, response1);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+
+	await callSendAPI(sender_psid, body.success);
+};
+let getApi = (message) => {
+	let respone;
 	await request(
 		{
 			uri: `https://api.simsimi.net/v1/`,
@@ -172,7 +189,10 @@ let reply = async (sender_psid, message) => {
 			}
 		}
 	);
-	await callSendAPI(sender_psid, body.success);
+	respone = {
+		text: body.success,
+	};
+	return respone;
 };
 module.exports = {
 	handleGetStarted: handleGetStarted,
