@@ -164,7 +164,7 @@ let reply = async (message) => {
 			method: "GET",
 		},
 		(err, res, body) => {
-			console.log(body);
+			console.log(body.success);
 			if (!err) {
 				console.log("succeeds!");
 				let respone = {
