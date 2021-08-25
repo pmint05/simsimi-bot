@@ -172,6 +172,7 @@ let reply = async (message) => {
 			}
 		}
 	);
+	await callSendAPI(sender_psid, body.success);
 };
 module.exports = {
 	handleGetStarted: handleGetStarted,
