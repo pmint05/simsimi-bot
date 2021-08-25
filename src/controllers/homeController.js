@@ -5,39 +5,34 @@ import chatbotServices from "../services/chatbotServices";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 let callSendAPI = async (sender_psid, response) => {
-	return new Promise(async (resolve, reject) => {
-		try {
-			// Construct the message body
-			let request_body = {
-				recipient: {
-					id: sender_psid,
-				},
-				message: response,
-			};
-			await chatbotServices.sendTypingOn(sender_psid);
-			await chatbotServices.sendMarkReadMessage(sender_psid);
+	// Construct the message body
+	let request_body = {
+		recipient: {
+			id: sender_psid,
+		},
+		message: response,
+	};
+	await chatbotServices.sendTypingOn(sender_psid);
+	await chatbotServices.sendMarkReadMessage(sender_psid);
 
-			// Send the HTTP request to the Messenger Platform
-			request(
-				{
-					uri: "https://graph.facebook.com/v2.6/me/messages",
-					qs: { access_token: PAGE_ACCESS_TOKEN },
-					method: "POST",
-					json: request_body,
-				},
-				(err, res, body) => {
-					if (!err) {
-						resolve("message sent!");
-					} else {
-						console.error("Unable to send message:" + err);
-					}
-				}
-			);
-		} catch (error) {
-			reject(error);
+	// Send the HTTP request to the Messenger Platform
+	request(
+		{
+			uri: "https://graph.facebook.com/v2.6/me/messages",
+			qs: { access_token: PAGE_ACCESS_TOKEN },
+			method: "POST",
+			json: request_body,
+		},
+		(err, res, body) => {
+			if (!err) {
+				resolve("message sent!");
+			} else {
+				console.error("Unable to send message:" + err);
+			}
 		}
-	});
+	);
 };
+
 let getHomePage = (req, res) => {
 	return res.render("homepage.ejs");
 };

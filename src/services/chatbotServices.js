@@ -162,7 +162,9 @@ let reply = async (message) => {
 		.then((res) => res.json())
 		.then((data) => {
 			console.log(data);
-			response = data.success;
+			response = {
+				text: data.success,
+			};
 		});
 	return response;
 
