@@ -171,7 +171,6 @@ let reply = async (message) => {
 	await fetch(url, options)
 		.then((res) => res.json())
 		.then((data) => {
-			console.log(data);
 			response = {
 				text: data.success,
 			};
