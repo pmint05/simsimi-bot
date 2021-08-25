@@ -159,20 +159,18 @@ let getStartTemplate = (username) => {
 let reply = async (sender_psid, message) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			let response = getApi();
+			let response = getApi(message);
 
 			//send generic template message
-			await callSendAPI(sender_psid, response1);
+			await callSendAPI(sender_psid, response);
 
 			resolve("done");
 		} catch (e) {
 			reject(e);
 		}
 	});
-
-	await callSendAPI(sender_psid, body.success);
 };
-let getApi = (message) => {
+let getApi = async (message) => {
 	let respone;
 	await request(
 		{
