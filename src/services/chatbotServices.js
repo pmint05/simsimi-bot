@@ -161,7 +161,15 @@ let reply = async (message) => {
 		.get(
 			`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`,
 			(resp) => {
-				console.log(resp);
+				let data = "";
+				// A chunk of data has been recieved.
+				resp.on("data", (chunk) => {
+					data += chunk;
+				});
+				// The whole response has been received. Print out the result.
+				resp.on("end", () => {
+					console.log(JSON.parse(data));
+				});
 			}
 		)
 		.on("error", (err) => {
