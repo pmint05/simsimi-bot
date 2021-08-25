@@ -25,7 +25,7 @@ let callSendAPI = async (sender_psid, response) => {
 		},
 		(err, res, body) => {
 			if (!err) {
-				resolve("message sent!");
+				console.log("message sent!");
 			} else {
 				console.error("Unable to send message:" + err);
 			}
