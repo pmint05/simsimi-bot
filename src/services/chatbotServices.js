@@ -1,9 +1,10 @@
 require("dotenv").config();
 import { response } from "express";
+
 import request from "request";
 const fetch = require("node-fetch");
-import utf8 from "utf8";
 import { URL } from "url";
+
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const IMAGE_GET_STARTED = "https://i.postimg.cc/rs93Bgqg/avt-remake.png";
 
@@ -121,10 +122,12 @@ let handleGetStarted = (sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			let username = await getUserName(sender_psid);
-			let response = getStartTemplate(username);
+			let response1 = getStartTemplate(username);
+			let response2 = getQuickStart();
 
 			//send generic template message
-			await callSendAPI(sender_psid, response);
+			await callSendAPI(sender_psid, response1);
+			await callSendAPI(sender_psid, response2);
 
 			resolve("done");
 		} catch (e) {
@@ -155,6 +158,19 @@ let getStartTemplate = (username) => {
 				],
 			},
 		},
+	};
+	return response;
+};
+let getQuickStart = () => {
+	let response = {
+		text: "Hãy nói xin chào với Simsimi nào",
+		quick_replies: [
+			{
+				content_type: "text",
+				title: "Chào Simsimi!",
+				payload: "Hello",
+			},
+		],
 	};
 	return response;
 };
