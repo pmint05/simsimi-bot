@@ -156,7 +156,7 @@ let getStartTemplate = (username) => {
 	};
 	return response;
 };
-let reply = async (message) => {
+let reply = async (sender_psid, message) => {
 	await request(
 		{
 			uri: `https://api.simsimi.net/v1/`,
