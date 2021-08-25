@@ -1,7 +1,7 @@
 require("dotenv").config();
 import { response } from "express";
 import request from "request";
-
+const https = require("https");
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const IMAGE_GET_STARTED = "https://i.postimg.cc/rs93Bgqg/avt-remake.png";
 
@@ -157,26 +157,43 @@ let getStartTemplate = (username) => {
 	return response;
 };
 let reply = async (message) => {
-	await request(
-		{
-			uri: `https://api.simsimi.net/v1/`,
-			qs: { text: message, lang: "vi_VN" },
-			method: "GET",
-		},
-		(err, res, body) => {
-			body = body.json();
-			console.log(body.success);
-			if (!err) {
-				console.log("succeeds!");
-				let respone = {
-					text: body.success,
-				};
-				return respone;
-			} else {
-				console.error("Error :" + err);
+	https
+		.get(
+			`https://api.simsimi.net/v1/?text${message}&lang=vi_VN`,
+			(resp) => {
+				let data = "";
+				// A chunk of data has been recieved.
+				resp.on("data", (chunk) => {
+					data += chunk;
+				});
+				// The whole response has been received. Print out the result.
+				resp.on("end", () => {
+					console.log(JSON.parse(data).explanation);
+				});
 			}
-		}
-	);
+		)
+		.on("error", (err) => {
+			console.log("Error: " + err.message);
+		});
+	// await request(
+	// 	{
+	// 		uri: `https://api.simsimi.net/v1/`,
+	// 		qs: { text: message, lang: "vi_VN" },
+	// 		method: "GET",
+	// 	},
+	// 	(err, res, body) => {
+	// 		console.log(body.success);
+	// 		if (!err) {
+	// 			console.log("succeeds!");
+	// 			let respone = {
+	// 				text: body.success,
+	// 			};
+	// 			return respone;
+	// 		} else {
+	// 			console.error("Error :" + err);
+	// 		}
+	// 	}
+	// );
 };
 
 module.exports = {
