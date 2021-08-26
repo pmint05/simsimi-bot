@@ -151,7 +151,7 @@ let getQuickStart = () => {
 			{
 				content_type: "text",
 				title: "Chào Simsimi",
-				payload: "",
+				payload: "HELLO",
 			},
 		],
 	};
@@ -246,7 +246,143 @@ let getAuthorInfo = () => {
 	};
 	return response;
 };
+let handleSendFirstMessage = (sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = reply("Chào Simsimi");
 
+			//send generic template message
+			await callSendAPI(sender_psid, response);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+let sendWjbuTemplate = (sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = getWjbuTemplate();
+
+			//send generic template message
+			await callSendAPI(sender_psid, response);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+let getWjbuTemplate = () => {
+	let respone = {
+		text: "Chào mừng bạn đã đến với Wjbu content 😉. Dưới đây là các lựa chọn cho bạn:",
+		quick_replies: [
+			{
+				content_type: "text",
+				title: "kiss",
+				payload: "WIBU_KISS",
+			},
+			{
+				content_type: "text",
+				title: "lick",
+				payload: "WIBU_LICK",
+			},
+			{
+				content_type: "text",
+				title: "hug",
+				payload: "WIBU_HUG",
+			},
+			{
+				content_type: "text",
+				title: "baka",
+				payload: "WIBU_BAKA",
+			},
+			{
+				content_type: "text",
+				title: "cry",
+				payload: "WIBU_CRY",
+			},
+			{
+				content_type: "text",
+				title: "poke",
+				payload: "WIBU_POKE",
+			},
+			{
+				content_type: "text",
+				title: "smug",
+				payload: "WIBU_SMUG",
+			},
+			{
+				content_type: "text",
+				title: "slap",
+				payload: "WIBU_SLAP",
+			},
+			{
+				content_type: "text",
+				title: "tickle",
+				payload: "WIBU_TICKLE",
+			},
+			{
+				content_type: "text",
+				title: "pat",
+				payload: "WIBU_PAT",
+			},
+			{
+				content_type: "text",
+				title: "laugh",
+				payload: "WIBU_LAUGH",
+			},
+			{
+				content_type: "text",
+				title: "feed",
+				payload: "WIBU_FEED",
+			},
+			{
+				content_type: "text",
+				title: "cuddle",
+				payload: "WIBU_CUDDLE",
+			},
+		],
+	};
+	return respone;
+};
+
+let sendWjbuContent = (text, sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = searchWjbuContent(text);
+
+			//send generic template message
+			await callSendAPI(sender_psid, response);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+let searchWjbuContent = async (message) => {
+	let url = new URL(
+		`https://api.simsimi.net/v1/?lang=vi&cf=true&text=${message}`
+	);
+
+	const options = {
+		method: "GET",
+		headers: {
+			"Content-Type": "text/plain;charset=UTF-8",
+		},
+	};
+	let response;
+	await fetch(url, options)
+		.then((res) => res.json())
+		.then((data) => {
+			response = {
+				text: data.messages,
+			};
+		});
+	return response;
+};
 module.exports = {
 	handleGetStarted: handleGetStarted,
 	callSendAPI: callSendAPI,
@@ -255,4 +391,7 @@ module.exports = {
 	sendMarkReadMessage: sendMarkReadMessage,
 	reply: reply,
 	sendAuthorInfo: sendAuthorInfo,
+	handleSendFirstMessage: handleSendFirstMessage,
+	sendWjbuTemplate: sendWjbuTemplate,
+	sendWjbuContent: sendWjbuContent,
 };

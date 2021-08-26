@@ -91,16 +91,26 @@ let getWebhook = (req, res) => {
 async function handleMessage(sender_psid, received_message) {
 	let response;
 	if (received_message.quick_reply && received_message.quick_reply.payload) {
-		if (received_message.quick_reply.payload === "USAGE") {
-			await chatbotServices.handleSendUsage(sender_psid);
+		let QR_payload = received_message.quick_reply.payload;
+		let WjbuPayload = QR_payload.search("WIBU");
+		if (WjbuPayload != -1) {
+			let title = received_message.quick_reply.title;
+			await chatbotServices.sendWjbuContent(title, sender_psid);
+		} else if (QR_payload === "HELLO") {
+			await chatbotServices.handleSendFirstMessage(sender_psid);
 		}
 		return;
 	}
 	// Checks if the message contains text
 	if (received_message.text) {
-		await chatbotServices.sendTypingOn(sender_psid);
-		await chatbotServices.sendMarkReadMessage(sender_psid);
-		response = await chatbotServices.reply(received_message.text);
+		let message = received_message.text;
+		if (message === "/wjbu") {
+			await chatbotServices.sendWjbuTemplate(sender_psid);
+		} else {
+			await chatbotServices.sendTypingOn(sender_psid);
+			await chatbotServices.sendMarkReadMessage(sender_psid);
+			response = await chatbotServices.reply(received_message.text);
+		}
 		// Create the payload for a basic text message, which
 		// will be added to the body of our request to the Send API
 	} else if (received_message.attachments) {
