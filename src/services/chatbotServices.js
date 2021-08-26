@@ -216,13 +216,10 @@ let reply = async (message) => {
 let sendAuthorInfo = (sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			let username = await getUserName(sender_psid);
-			let response1 = getStartTemplate(username);
-			let response2 = getQuickStart();
+			let response = getAuthorInfo();
 
 			//send generic template message
-			await callSendAPI(sender_psid, response1);
-			await callSendAPI(sender_psid, response2);
+			await callSendAPI(sender_psid, response);
 
 			resolve("done");
 		} catch (e) {

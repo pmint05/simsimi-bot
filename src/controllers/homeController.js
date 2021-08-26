@@ -153,6 +153,9 @@ async function handlePostback(sender_psid, received_postback) {
 		case "GET_STARTED":
 			await chatbotServices.handleGetStarted(sender_psid);
 			break;
+		case "ABOUT_AUTHOR":
+			await chatbotServices.sendAuthorInfo(sender_psid);
+			break;
 		default:
 			response = { text: `Oops, Xin lỗi tôi không hiểu ${payload}` };
 	}
@@ -202,11 +205,11 @@ let setupPersistentMenu = async (req, res) => {
 						title: "AUTHOR",
 						url: "fb.com/pmint05/",
 					},
-					// {
-					// 	type: "postback",
-					// 	title: "Khởi động lại bot",
-					// 	payload: "RESTART_CHATBOT",
-					// },
+					{
+						type: "postback",
+						title: "Khởi động lại bot",
+						payload: "RESTART_CHATBOT",
+					},
 				],
 			},
 		],
