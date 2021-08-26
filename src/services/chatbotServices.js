@@ -347,7 +347,6 @@ let getWjbuTemplate = () => {
 	};
 	return respone;
 };
-
 let sendWjbuContent = (text, sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
@@ -378,7 +377,7 @@ let searchWjbuContent = async (message) => {
 		.then((res) => res.json())
 		.then((data) => {
 			response = {
-				text: data.messages,
+				attachment: data.messages.attachment,
 			};
 		});
 	return response;
