@@ -362,18 +362,15 @@ let sendWjbuContent = (text, sender_psid) => {
 	});
 };
 let searchWjbuContent = async (message) => {
-	let url = new URL(
-		`https://api.simsimi.net/v1/?lang=vi&cf=true&text=${message}`
-	);
-
-	const options = {
-		method: "GET",
-		headers: {
-			"Content-Type": "text/plain;charset=UTF-8",
-		},
-	};
+	let url = `https://api.simsimi.net/v1/?lang=vi&cf=true&text=${message}`;
+	// const options = {
+	// 	method: "GET",
+	// 	headers: {
+	// 		"Content-Type": "text/plain;charset=UTF-8",
+	// 	},
+	// };
 	let response;
-	await fetch(url, options)
+	await fetch(url)
 		.then((res) => res.json())
 		.then((data) => {
 			response = {
