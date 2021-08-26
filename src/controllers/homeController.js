@@ -122,6 +122,8 @@ async function handleMessage(sender_psid, received_message) {
 			await chatbotServices.sendNSFWTemplate(sender_psid);
 		} else if (message === "/gif") {
 			await chatbotServices.sendGifTemplate(sender_psid);
+		} else if (message === "/help") {
+			await chatbotServices.sendHelpTemplate(sender_psid);
 		} else {
 			await chatbotServices.sendTypingOn(sender_psid);
 			await chatbotServices.sendMarkReadMessage(sender_psid);
@@ -184,8 +186,8 @@ async function handlePostback(sender_psid, received_postback) {
 		case "GET_STARTED":
 			await chatbotServices.handleGetStarted(sender_psid);
 			break;
-		case "ABOUT_AUTHOR":
-			await chatbotServices.sendAuthorInfo(sender_psid);
+		case "ABOUT_PAGE":
+			await chatbotServices.sendPageInfo(sender_psid);
 			break;
 		case "WJBU":
 			await chatbotServices.sendWjbuTemplate(sender_psid);
@@ -196,6 +198,10 @@ async function handlePostback(sender_psid, received_postback) {
 		case "GIF":
 			await chatbotServices.sendGifTemplate(sender_psid);
 			break;
+		case "HELP":
+			await chatbotServices.sendHelpTemplate(sender_psid);
+			break;
+
 		default:
 			response = { text: `Oops, Xin lỗi tôi không hiểu ${payload}` };
 	}
@@ -244,6 +250,11 @@ let setupPersistentMenu = async (req, res) => {
 						type: "web_url",
 						title: "AUTHOR",
 						url: "fb.com/pmint05/",
+					},
+					{
+						type: "postback",
+						title: "/help",
+						payload: "HELP",
 					},
 					{
 						type: "postback",

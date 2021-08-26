@@ -134,8 +134,13 @@ let getStartTemplate = (username) => {
 						buttons: [
 							{
 								type: "postback",
-								title: "ABOUT AUTHOR",
-								payload: "ABOUT_AUTHOR",
+								title: "ABOUT PAGE",
+								payload: "ABOUT_PAGE",
+							},
+							{
+								type: "postback",
+								title: "/help",
+								payload: "HELP",
 							},
 						],
 					},
@@ -214,10 +219,10 @@ let reply = async (message) => {
 	// 	}
 	// );
 };
-let sendAuthorInfo = (sender_psid) => {
+let sendPageInfo = (sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			let response = getAuthorInfo();
+			let response = getPageInfo();
 
 			//send generic template message
 			await callSendAPI(sender_psid, response);
@@ -228,18 +233,23 @@ let sendAuthorInfo = (sender_psid) => {
 		}
 	});
 };
-let getAuthorInfo = () => {
+let getPageInfo = () => {
 	let response = {
 		attachment: {
 			type: "template",
 			payload: {
 				template_type: "button",
-				text: 'Page này được mình tạo ra với mục đích giải trí, giúp những bạn codon có người để tâm sự 😉\n▷ Hướng dẫn sử dụng: Hãy nhắn bất kỳ tin nhắn nào và Simsimi sẽ trả lời bạn. Chúc bạn một ngày mới tốt lành!\n"𝘍𝘰𝘭𝘭𝘰𝘸 𝘮𝘦 𝘢𝘯𝘥 𝘺𝘰𝘶\'𝘭𝘭 𝘯𝘦𝘷𝘦𝘳 𝘣𝘦 𝘢𝘭𝘰𝘯𝘦!"\nCreated by 𝐩𝐦𝐢𝐧𝐭𝟎𝟓 with ❤️',
+				text: 'Page này được mình tạo ra với mục đích giải trí, giúp những bạn codon có người để tâm sự 😉.Chúc bạn một ngày mới tốt lành!\n"𝘍𝘰𝘭𝘭𝘰𝘸 𝘮𝘦 𝘢𝘯𝘥 𝘺𝘰𝘶\'𝘭𝘭 𝘯𝘦𝘷𝘦𝘳 𝘣𝘦 𝘢𝘭𝘰𝘯𝘦!"\nCreated by 𝐩𝐦𝐢𝐧𝐭𝟎𝟓 with ❤️',
 				buttons: [
 					{
 						type: "web_url",
 						url: "fb.com/pmint05",
 						title: "AUTHOR",
+					},
+					{
+						type: "postback",
+						payload: "HELP",
+						title: "/help",
 					},
 				],
 			},
@@ -569,6 +579,25 @@ let getGifUrl = async (text) => {
 		});
 	return response;
 };
+let sendHelpTemplate = (sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = getHelpTemplate();
+
+			//send generic template message
+			await callSendAPI(sender_psid, response);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+let getHelpTemplate = () => {
+	let response = {
+		text: "Một số câu lệnh chính:\n• /help: Simsimi sẽ gửi cho bạn đống tin nhắn này.\n• /gif: Simsimi sẽ gửi gif ngẫu nhiên với tag mà bạn chọn.\n• /wjbu: Gif hoặc ảnh cho mấy bạn wjbu 😉.\n• /nsfw: Content 18+ 🔞.\n ... \nCác tính năng hay ho khác vẫn đang được cập nhật\n→ Note: Do lưu lượng truy cập khá lớn nên Simsimi có thể sẽ rep chậm (30s - 1p). Các bạn chịu khó đợi Simsimi rep nha. Cảm ơn các bạn đã đến thăm Simsimi. Yêu các bạn ❤️🥰!",
+	};
+};
 module.exports = {
 	handleGetStarted: handleGetStarted,
 	callSendAPI: callSendAPI,
@@ -576,7 +605,7 @@ module.exports = {
 	sendTypingOn: sendTypingOn,
 	sendMarkReadMessage: sendMarkReadMessage,
 	reply: reply,
-	sendAuthorInfo: sendAuthorInfo,
+	sendPageInfo: sendPageInfo,
 	handleSendFirstMessage: handleSendFirstMessage,
 	sendWjbuTemplate: sendWjbuTemplate,
 	sendWjbuContent: sendWjbuContent,
@@ -584,4 +613,5 @@ module.exports = {
 	sendNSFWTemplate: sendNSFWTemplate,
 	sendGifTemplate: sendGifTemplate,
 	sendGifContent: sendGifContent,
+	sendHelpTemplate: sendHelpTemplate,
 };
