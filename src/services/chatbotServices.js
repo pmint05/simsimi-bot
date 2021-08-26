@@ -550,7 +550,7 @@ let sendGifContent = (text, sender_psid) => {
 		}
 	});
 };
-let getGifUrl = (text) => {
+let getGifUrl = async (text) => {
 	// https://api.giphy.com/v1/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=fail&rating=pg-13
 	let url = ` https://api.giphy.com/v1/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=${text}`;
 	let response;
