@@ -471,7 +471,7 @@ let sendGifTemplate = (sender_psid) => {
 };
 let getGifTemplate = () => {
 	let respone = {
-		text: "Wjbu content 🤫. Dưới đây là các lựa chọn cho bạn:",
+		text: "GIF content 😙. Dưới đây là các lựa chọn cho bạn:",
 		quick_replies: [
 			{
 				content_type: "text",
@@ -562,7 +562,7 @@ let getGifUrl = async (text) => {
 					type: "image",
 					payload: {
 						is_reusable: true,
-						url: data.image_original_url,
+						url: data.data.image_original_url,
 					},
 				},
 			};

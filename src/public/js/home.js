@@ -1,5 +1,7 @@
-fetch("https://api.simsimi.net/v1/?lang=vi&cf=true&text=kiss")
+fetch(
+	"https://api.giphy.com/v1/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=funny"
+)
 	.then((response) => response.json())
 	.then((data) => {
-		console.log(data.messages[0].attachment.payload.url);
+		console.log(data.data.image_original_url);
 	});
