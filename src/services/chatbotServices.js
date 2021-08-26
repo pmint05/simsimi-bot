@@ -149,9 +149,9 @@ let getStartTemplate = (username) => {
 						image_url: IMAGE_GET_STARTED,
 						buttons: [
 							{
-								type: "web_url",
-								title: "AUTHOR",
-								url: "fb.com/pmint05/",
+								type: "postback",
+								title: "ABOUT AUTHOR",
+								postback: "ABOUT_AUTHOR",
 							},
 						],
 					},
@@ -167,7 +167,7 @@ let getQuickStart = () => {
 		quick_replies: [
 			{
 				content_type: "text",
-				title: "Chào Simsimi!",
+				title: "Chào Simsimi",
 				payload: "Hello",
 			},
 		],
@@ -213,6 +213,42 @@ let reply = async (message) => {
 	// 	}
 	// );
 };
+let sendAuthorInfo = (sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let username = await getUserName(sender_psid);
+			let response1 = getStartTemplate(username);
+			let response2 = getQuickStart();
+
+			//send generic template message
+			await callSendAPI(sender_psid, response1);
+			await callSendAPI(sender_psid, response2);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+let getAuthorInfo = () => {
+	let response = {
+		attachment: {
+			type: "template",
+			payload: {
+				template_type: "button",
+				text: 'Page này được mình tạo ra với mục đích giải trí, giúp những bạn codon có người để tâm sự 😉\n▷ Hướng dẫn sử dụng: Hãy nhắn bất kỳ tin nhắn nào và Simsimi sẽ trả lời bạn. Chúc bạn một ngày mới tốT lành!\n"Follow me and you\'ll never be alone!"\nCreated by 𝐩𝐦𝐢𝐧𝐭𝟎𝟓 with ❤️',
+				buttons: [
+					{
+						type: "web_url",
+						url: "fb.com/pmint05",
+						title: "AUTHOR",
+					},
+				],
+			},
+		},
+	};
+	return response;
+};
 
 module.exports = {
 	handleGetStarted: handleGetStarted,
@@ -221,4 +257,5 @@ module.exports = {
 	sendTypingOn: sendTypingOn,
 	sendMarkReadMessage: sendMarkReadMessage,
 	reply: reply,
+	sendAuthorInfo: sendAuthorInfo,
 };
