@@ -90,19 +90,27 @@ let getWebhook = (req, res) => {
 // Handles messages events
 async function handleMessage(sender_psid, received_message) {
 	let response;
-	if (received_message.quick_reply && received_message.quick_reply.payload) {
+	if (
+		received_message.quick_reply &&
+		received_message.quick_reply.payload != ""
+	) {
 		let QR_payload = received_message.quick_reply.payload;
 		let WjbuPayload = QR_payload.search("WIBU");
 		let NSFWPayload = QR_payload.search("NSFW");
+		let GifPayload = QR_payload.search("GIF");
 		if (WjbuPayload != -1) {
 			let title = received_message.text;
 			await chatbotServices.sendWjbuContent(title, sender_psid);
 		} else if (NSFWPayload != -1) {
 			let title = received_message.text;
 			await chatbotServices.sendNSFWContent(title, sender_psid);
-		} else if (QR_payload === "HELLO") {
-			await chatbotServices.handleSendFirstMessage(sender_psid);
+		} else if (GifPayload != -1) {
+			let title = received_message.text;
+			await chatbotServices.sendGifContent(title, sender_psid);
 		}
+		// else if (QR_payload === "HELLO") {
+		// 	await chatbotServices.handleSendFirstMessage(sender_psid);
+		// }
 		return;
 	}
 	// Checks if the message contains text

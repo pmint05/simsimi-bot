@@ -455,7 +455,20 @@ let searchWjbuContent = async (message) => {
 		});
 	return response;
 };
-let sendGifTemplate = (sender_psid) => {};
+let sendGifTemplate = (sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = getGifTemplate();
+
+			//send generic template message
+			await callSendAPI(sender_psid, response);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
 let getGifTemplate = () => {
 	let respone = {
 		text: "Wjbu content 🤫. Dưới đây là các lựa chọn cho bạn:",
@@ -519,8 +532,42 @@ let getGifTemplate = () => {
 	};
 	return respone;
 };
+let sendGifContent = (text, sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response1 = {
+				text: "Bạn chờ sim 1 xíu nha ...",
+			};
+			let response2 = await getGifUrl(text);
+
+			//send generic template message
+			await callSendAPI(sender_psid, response1);
+			await callSendAPI(sender_psid, response2);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
 let getGifUrl = (text) => {
 	// https://api.giphy.com/v1/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=fail&rating=pg-13
+	let url = ` https://api.giphy.com/v1/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=${text}`;
+	let response;
+	await fetch(url)
+		.then((res) => res.json())
+		.then((data) => {
+			response = {
+				attachment: {
+					type: "image",
+					payload: {
+						is_reusable: true,
+						url: data.image_original_url,
+					},
+				},
+			};
+		});
+	return response;
 };
 module.exports = {
 	handleGetStarted: handleGetStarted,
@@ -536,4 +583,5 @@ module.exports = {
 	sendNSFWContent: sendNSFWContent,
 	sendNSFWTemplate: sendNSFWTemplate,
 	sendGifTemplate: sendGifTemplate,
+	sendGifContent: sendGifContent,
 };
