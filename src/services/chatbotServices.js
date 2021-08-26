@@ -377,7 +377,13 @@ let searchWjbuContent = async (message) => {
 		.then((res) => res.json())
 		.then((data) => {
 			response = {
-				attachment: data.messages[0].attachment,
+				attachment: {
+					type: "image",
+					payload: {
+						is_reusable: true,
+						url: data.messages[0].attachment.payload.url,
+					},
+				},
 			};
 		});
 	console.log(response);
