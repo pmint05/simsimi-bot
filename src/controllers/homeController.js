@@ -112,6 +112,8 @@ async function handleMessage(sender_psid, received_message) {
 			await chatbotServices.sendWjbuTemplate(sender_psid);
 		} else if (message === "/nsfw") {
 			await chatbotServices.sendNSFWTemplate(sender_psid);
+		} else if (message === "/gif") {
+			await chatbotServices.sendGifTemplate(sender_psid);
 		} else {
 			await chatbotServices.sendTypingOn(sender_psid);
 			await chatbotServices.sendMarkReadMessage(sender_psid);
@@ -183,7 +185,9 @@ async function handlePostback(sender_psid, received_postback) {
 		case "NSFW":
 			await chatbotServices.sendNSFWTemplate(sender_psid);
 			break;
-
+		case "GIF":
+			await chatbotServices.sendGifTemplate(sender_psid);
+			break;
 		default:
 			response = { text: `Oops, Xin lỗi tôi không hiểu ${payload}` };
 	}

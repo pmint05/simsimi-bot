@@ -398,10 +398,14 @@ let getNSFWTemplate = () => {
 let sendWjbuContent = (text, sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			let response = await searchWjbuContent(text);
+			let response1 = {
+				text: "Bạn chờ sim 1 xíu nha ...",
+			};
+			let response2 = await searchWjbuContent(text);
 
 			//send generic template message
-			await callSendAPI(sender_psid, response);
+			await callSendAPI(sender_psid, response1);
+			await callSendAPI(sender_psid, response2);
 
 			resolve("done");
 		} catch (e) {
@@ -412,10 +416,14 @@ let sendWjbuContent = (text, sender_psid) => {
 let sendNSFWContent = (text, sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			let response = await searchWjbuContent(text);
+			let response1 = {
+				text: "Bạn chờ sim 1 xíu nha ...",
+			};
+			let response2 = await searchWjbuContent(text);
 
 			//send generic template message
-			await callSendAPI(sender_psid, response);
+			await callSendAPI(sender_psid, response1);
+			await callSendAPI(sender_psid, response2);
 
 			resolve("done");
 		} catch (e) {
@@ -447,6 +455,73 @@ let searchWjbuContent = async (message) => {
 		});
 	return response;
 };
+let sendGifTemplate = (sender_psid) => {};
+let getGifTemplate = () => {
+	let respone = {
+		text: "Wjbu content 🤫. Dưới đây là các lựa chọn cho bạn:",
+		quick_replies: [
+			{
+				content_type: "text",
+				title: "anime",
+				payload: "GIF_ANIME",
+			},
+			{
+				content_type: "text",
+				title: "action",
+				payload: "GIF_ACTION",
+			},
+			{
+				content_type: "text",
+				title: "funny",
+				payload: "GIF_FUNNY",
+			},
+			{
+				content_type: "text",
+				title: "fail",
+				payload: "GIF_FAIL",
+			},
+			{
+				content_type: "text",
+				title: "like-a-boss",
+				payload: "GIF_LIKE_A_BOSS",
+			},
+			{
+				content_type: "text",
+				title: "dank-memes",
+				payload: "GIF_DARK_MEMES",
+			},
+			{
+				content_type: "text",
+				title: "memes",
+				payload: "GIF_MEMES",
+			},
+			{
+				content_type: "text",
+				title: "loop",
+				payload: "GIF_LOOP",
+			},
+			{
+				content_type: "text",
+				title: "animals",
+				payload: "GIF_ANIMALS",
+			},
+			{
+				content_type: "text",
+				title: "pixel",
+				payload: "GIF_PIXEL",
+			},
+			{
+				content_type: "text",
+				title: "timelapse",
+				payload: "GIF_TIMELAPSE",
+			},
+		],
+	};
+	return respone;
+};
+let getGifUrl = (text) => {
+	// https://api.giphy.com/v1/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=fail&rating=pg-13
+};
 module.exports = {
 	handleGetStarted: handleGetStarted,
 	callSendAPI: callSendAPI,
@@ -460,4 +535,5 @@ module.exports = {
 	sendWjbuContent: sendWjbuContent,
 	sendNSFWContent: sendNSFWContent,
 	sendNSFWTemplate: sendNSFWTemplate,
+	sendGifTemplate: sendGifTemplate,
 };
