@@ -151,7 +151,7 @@ let getQuickStart = () => {
 			{
 				content_type: "text",
 				title: "Chào Simsimi",
-				payload: "Hello",
+				payload: "",
 			},
 		],
 	};
@@ -174,7 +174,6 @@ let handleGetStarted = (sender_psid) => {
 		}
 	});
 };
-
 let reply = async (message) => {
 	let url = new URL(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`);
 

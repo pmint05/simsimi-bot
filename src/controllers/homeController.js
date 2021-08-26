@@ -90,7 +90,12 @@ let getWebhook = (req, res) => {
 // Handles messages events
 async function handleMessage(sender_psid, received_message) {
 	let response;
-
+	if (received_message.quick_reply && received_message.quick_reply.payload) {
+		if (received_message.quick_reply.payload === "USAGE") {
+			await chatbotServices.handleSendUsage(sender_psid);
+		}
+		return;
+	}
 	// Checks if the message contains text
 	if (received_message.text) {
 		await chatbotServices.sendTypingOn(sender_psid);
