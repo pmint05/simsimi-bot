@@ -249,7 +249,7 @@ let getAuthorInfo = () => {
 let handleSendFirstMessage = (sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			let response = reply("Chào Simsimi");
+			let response = await reply("Chào Simsimi");
 
 			//send generic template message
 			await callSendAPI(sender_psid, response);
