@@ -350,7 +350,7 @@ let getWjbuTemplate = () => {
 let sendWjbuContent = (text, sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			let response = searchWjbuContent(text);
+			let response = await searchWjbuContent(text);
 
 			//send generic template message
 			await callSendAPI(sender_psid, response);
