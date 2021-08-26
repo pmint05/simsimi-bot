@@ -380,7 +380,7 @@ let searchWjbuContent = async (message) => {
 				attachment: data.messages.attachment,
 			};
 		});
-	return response;
+	console.log(response);
 };
 module.exports = {
 	handleGetStarted: handleGetStarted,
