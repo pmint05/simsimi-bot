@@ -595,8 +595,9 @@ let sendHelpTemplate = (sender_psid) => {
 };
 let getHelpTemplate = () => {
 	let response = {
-		text: "Một số câu lệnh chính:\n• /help: Simsimi sẽ gửi cho bạn đống tin nhắn này.\n• /gif: Simsimi sẽ gửi gif ngẫu nhiên với tag mà bạn chọn.\n• /wjbu: Gif hoặc ảnh cho mấy bạn wjbu 😉.\n• /nsfw: Content 18+ 🔞.\n ... \nCác tính năng hay ho khác vẫn đang được cập nhật\n→ Note: Do lưu lượng truy cập khá lớn nên Simsimi có thể sẽ rep chậm (30s - 1p). Các bạn chịu khó đợi Simsimi rep nha. Cảm ơn các bạn đã đến thăm Simsimi. Yêu các bạn ❤️🥰!",
+		text: "Một số câu lệnh chính:\n• /help: Simsimi sẽ gửi cho bạn đống tin nhắn này.\n• /gif: Simsimi sẽ gửi gif ngẫu nhiên với tag mà bạn chọn.\n• /wjbu: Gif hoặc ảnh cho mấy bạn wjbu 😉.\n• /nsfw: Content 18+ 🔞.\n ... \nCác tính năng hay ho khác vẫn đang được cập nhật\n→ Note: Do lưu lượng truy cập khá lớn nên Simsimi có thể sẽ rep chậm (30s - 1p). Các bạn chịu khó đợi Simsimi rep nha. Cảm ơn các bạn đã đến thăm CS. Yêu các bạn ❤️🥰!",
 	};
+	return response;
 };
 module.exports = {
 	handleGetStarted: handleGetStarted,
