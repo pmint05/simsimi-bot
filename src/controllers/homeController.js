@@ -94,7 +94,7 @@ async function handleMessage(sender_psid, received_message) {
 		let QR_payload = received_message.quick_reply.payload;
 		let WjbuPayload = QR_payload.search("WIBU");
 		if (WjbuPayload != -1) {
-			let title = received_message.quick_reply.title;
+			let title = received_message.text;
 			await chatbotServices.sendWjbuContent(title, sender_psid);
 		} else if (QR_payload === "HELLO") {
 			await chatbotServices.handleSendFirstMessage(sender_psid);
