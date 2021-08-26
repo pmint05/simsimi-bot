@@ -118,23 +118,6 @@ let getUserName = (sender_psid) => {
 		);
 	});
 };
-let handleGetStarted = (sender_psid) => {
-	return new Promise(async (resolve, reject) => {
-		try {
-			let username = await getUserName(sender_psid);
-			let response1 = getStartTemplate(username);
-			let response2 = getQuickStart();
-
-			//send generic template message
-			await callSendAPI(sender_psid, response1);
-			await callSendAPI(sender_psid, response2);
-
-			resolve("done");
-		} catch (e) {
-			reject(e);
-		}
-	});
-};
 let getStartTemplate = (username) => {
 	let response = {
 		attachment: {
@@ -151,7 +134,7 @@ let getStartTemplate = (username) => {
 							{
 								type: "postback",
 								title: "ABOUT AUTHOR",
-								postback: "ABOUT_AUTHOR",
+								payload: "ABOUT_AUTHOR",
 							},
 						],
 					},
@@ -174,6 +157,24 @@ let getQuickStart = () => {
 	};
 	return response;
 };
+let handleGetStarted = (sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let username = await getUserName(sender_psid);
+			let response1 = getStartTemplate(username);
+			let response2 = getQuickStart();
+
+			//send generic template message
+			await callSendAPI(sender_psid, response1);
+			await callSendAPI(sender_psid, response2);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+
 let reply = async (message) => {
 	let url = new URL(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`);
 
