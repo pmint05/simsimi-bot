@@ -184,8 +184,8 @@ let reply = async (message) => {
 	let url = new URL(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`);
 
 	const options = {
-		method: "GET",
-		headers: {
+		"method": "GET",
+		"headers": {
 			"Content-Type": "text/plain;charset=UTF-8",
 		},
 	};
@@ -194,7 +194,7 @@ let reply = async (message) => {
 		.then((res) => res.json())
 		.then((data) => {
 			response = {
-				text: data.success,
+				"text": data.success,
 			};
 		});
 	return response;
