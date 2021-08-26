@@ -93,9 +93,13 @@ async function handleMessage(sender_psid, received_message) {
 	if (received_message.quick_reply && received_message.quick_reply.payload) {
 		let QR_payload = received_message.quick_reply.payload;
 		let WjbuPayload = QR_payload.search("WIBU");
+		let NSFWPayload = QR_payload.search("NSFW");
 		if (WjbuPayload != -1) {
 			let title = received_message.text;
 			await chatbotServices.sendWjbuContent(title, sender_psid);
+		} else if (NSFWPayload != -1) {
+			let title = received_message.text;
+			await chatbotServices.sendNSFWContent(title, sender_psid);
 		} else if (QR_payload === "HELLO") {
 			await chatbotServices.handleSendFirstMessage(sender_psid);
 		}
@@ -171,6 +175,13 @@ async function handlePostback(sender_psid, received_postback) {
 		case "ABOUT_AUTHOR":
 			await chatbotServices.sendAuthorInfo(sender_psid);
 			break;
+		case "WJBU":
+			await chatbotServices.sendWjbuTemplate(sender_psid);
+			break;
+		case "NSFW":
+			await chatbotServices.sendNSFWTemplate(sender_psid);
+			break;
+
 		default:
 			response = { text: `Oops, Xin lỗi tôi không hiểu ${payload}` };
 	}

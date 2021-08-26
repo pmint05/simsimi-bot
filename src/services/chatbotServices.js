@@ -1,4 +1,5 @@
 require("dotenv").config();
+import { text } from "body-parser";
 import { response } from "express";
 
 import request from "request";
@@ -274,9 +275,23 @@ let sendWjbuTemplate = (sender_psid) => {
 		}
 	});
 };
+let sendNSFWTemplate = (sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = getNSFWTemplate();
+
+			//send generic template message
+			await callSendAPI(sender_psid, response);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
 let getWjbuTemplate = () => {
 	let respone = {
-		text: "Chào mừng bạn đã đến với Wjbu content 😉. Dưới đây là các lựa chọn cho bạn:",
+		text: "Wjbu content 🤫. Dưới đây là các lựa chọn cho bạn:",
 		quick_replies: [
 			{
 				content_type: "text",
@@ -347,7 +362,54 @@ let getWjbuTemplate = () => {
 	};
 	return respone;
 };
+let getNSFWTemplate = () => {
+	let respone = {
+		text: "NSFW content 🔞. Cảnh báo: Dưới đây là nội dung 18+",
+		quick_replies: [
+			{
+				content_type: "text",
+				title: "hentai",
+				payload: "NSFW_HENTAI",
+			},
+			{
+				content_type: "text",
+				title: "pussy",
+				payload: "NSFW_PUSSY",
+			},
+			{
+				content_type: "text",
+				title: "bj",
+				payload: "NSFW_BJ",
+			},
+			{
+				content_type: "text",
+				title: "lesbian",
+				payload: "NSFW_LESBIAN",
+			},
+			{
+				content_type: "text",
+				title: "lewd",
+				payload: "NSFW_LEWD",
+			},
+		],
+	};
+	return respone;
+};
 let sendWjbuContent = (text, sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = await searchWjbuContent(text);
+
+			//send generic template message
+			await callSendAPI(sender_psid, response);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+let sendNSFWContent = (text, sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			let response = await searchWjbuContent(text);
@@ -383,7 +445,6 @@ let searchWjbuContent = async (message) => {
 				},
 			};
 		});
-	console.log(response);
 	return response;
 };
 module.exports = {
@@ -397,4 +458,6 @@ module.exports = {
 	handleSendFirstMessage: handleSendFirstMessage,
 	sendWjbuTemplate: sendWjbuTemplate,
 	sendWjbuContent: sendWjbuContent,
+	sendNSFWContent: sendNSFWContent,
+	sendNSFWTemplate: sendNSFWTemplate,
 };
