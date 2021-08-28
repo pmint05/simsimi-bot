@@ -118,8 +118,8 @@ async function handleMessage(sender_psid, received_message) {
 		let message = received_message.text;
 		if (message === "/wjbu") {
 			await chatbotServices.sendWjbuTemplate(sender_psid);
-		// } else if (message === "/nsfw") {
-		// 	await chatbotServices.sendNSFWTemplate(sender_psid);
+		} else if (message === "/nsfw") {
+			await chatbotServices.sendNSFWTemplate(sender_psid);
 		} else if (message === "/gif") {
 			await chatbotServices.sendGifTemplate(sender_psid);
 		} else if (message === "/help") {
