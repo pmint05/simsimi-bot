@@ -184,8 +184,8 @@ let reply = async (message) => {
 	let url = new URL(`https://api.simsimi.net/v1/?text=${message}&lang=vi_VN`);
 
 	const options = {
-		"method": "GET",
-		"headers": {
+		method: "GET",
+		headers: {
 			"Content-Type": "text/plain;charset=UTF-8",
 		},
 	};
@@ -194,7 +194,7 @@ let reply = async (message) => {
 		.then((res) => res.json())
 		.then((data) => {
 			response = {
-				"text": data.success,
+				text: data.success,
 			};
 		});
 	return response;
@@ -595,7 +595,7 @@ let sendHelpTemplate = (sender_psid) => {
 };
 let getHelpTemplate = () => {
 	let response = {
-		text: "Một số câu lệnh chính:\n• /help: Simsimi sẽ gửi cho bạn đống tin nhắn này.\n• /gif: Sim sẽ gửi gif ngẫu nhiên với tag mà bạn chọn.\n• /wjbu: Gif hoặc ảnh cho mấy bạn wjbu 😉.\n• /nsfw: Content 18+ 🔞.\n ... \nCác tính năng hay ho khác vẫn đang được cập nhật\n→ Note: Do lưu lượng truy cập khá lớn nên Simsimi có thể sẽ rep chậm (30s - 1p). Các bạn chịu khó đợi Simsimi rep nha. Cảm ơn các bạn đã ghé thăm CS. Yêu các bạn ❤️🥰!",
+		text: "Một số câu lệnh chính:\n• /help: Simsimi sẽ gửi cho bạn đống tin nhắn này.\n• /gif: Sim sẽ gửi gif ngẫu nhiên với tag mà bạn chọn.\n• /wjbu: Gif hoặc ảnh cho mấy bạn wjbu 😉.\n ... \nCác tính năng hay ho khác vẫn đang được cập nhật\n→ Note: Do lưu lượng truy cập khá lớn nên Simsimi có thể sẽ rep chậm (30s - 1p). Các bạn chịu khó đợi Simsimi rep nha. Cảm ơn các bạn đã ghé thăm CS. Yêu các bạn ❤️🥰!",
 	};
 	//\n• /nsfw: Content 18+ 🔞.
 	return response;
