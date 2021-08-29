@@ -785,7 +785,7 @@ let getMp3Link = async (link) => {
 			response = {
 				// text: data.mp3_link[0],
 				attachment: {
-					type: "file",
+					type: "files",
 					payload: {
 						url: data.mp3_link[0],
 					},
