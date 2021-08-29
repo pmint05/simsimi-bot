@@ -300,7 +300,7 @@ let sendNSFWTemplate = (sender_psid) => {
 	});
 };
 let getWjbuTemplate = () => {
-	let respone = {
+	let response = {
 		text: "Wjbu content 🤫. Dưới đây là các lựa chọn cho bạn:",
 		quick_replies: [
 			{
@@ -370,7 +370,7 @@ let getWjbuTemplate = () => {
 			},
 		],
 	};
-	return respone;
+	return response;
 };
 let getNSFWTemplate = () => {
 	let response = {
@@ -412,10 +412,80 @@ let sendWjbuContent = (text, sender_psid) => {
 				text: "Bạn chờ Sim 1 xíu nha ...",
 			};
 			let response2 = await searchWjbuContent(text);
-
+			let response3 = {
+				text: "Thêm nữa không bạn hiền =3",
+				quick_replies: [
+					{
+						content_type: "text",
+						title: "kiss",
+						payload: "WIBU_KISS",
+					},
+					{
+						content_type: "text",
+						title: "lick",
+						payload: "WIBU_LICK",
+					},
+					{
+						content_type: "text",
+						title: "hug",
+						payload: "WIBU_HUG",
+					},
+					{
+						content_type: "text",
+						title: "baka",
+						payload: "WIBU_BAKA",
+					},
+					{
+						content_type: "text",
+						title: "cry",
+						payload: "WIBU_CRY",
+					},
+					{
+						content_type: "text",
+						title: "poke",
+						payload: "WIBU_POKE",
+					},
+					{
+						content_type: "text",
+						title: "smug",
+						payload: "WIBU_SMUG",
+					},
+					{
+						content_type: "text",
+						title: "slap",
+						payload: "WIBU_SLAP",
+					},
+					{
+						content_type: "text",
+						title: "tickle",
+						payload: "WIBU_TICKLE",
+					},
+					{
+						content_type: "text",
+						title: "pat",
+						payload: "WIBU_PAT",
+					},
+					{
+						content_type: "text",
+						title: "laugh",
+						payload: "WIBU_LAUGH",
+					},
+					{
+						content_type: "text",
+						title: "feed",
+						payload: "WIBU_FEED",
+					},
+					{
+						content_type: "text",
+						title: "cuddle",
+						payload: "WIBU_CUDDLE",
+					},
+				],
+			};
 			//send generic template message
 			await callSendAPI(sender_psid, response1);
 			await callSendAPI(sender_psid, response2);
+			await callSendAPI(sender_psid, response3);
 
 			resolve("done");
 		} catch (e) {
@@ -464,7 +534,6 @@ let sendNSFWContent = (text, sender_psid) => {
 			//send generic template message
 			await callSendAPI(sender_psid, response1);
 			await callSendAPI(sender_psid, response2);
-
 			await callSendAPI(sender_psid, response3);
 
 			resolve("done");
@@ -512,7 +581,7 @@ let sendGifTemplate = (sender_psid) => {
 	});
 };
 let getGifTemplate = () => {
-	let respone = {
+	let response = {
 		text: "GIF content 😙. Dưới đây là các lựa chọn cho bạn:",
 		quick_replies: [
 			{
@@ -572,7 +641,7 @@ let getGifTemplate = () => {
 			},
 		],
 	};
-	return respone;
+	return response;
 };
 let sendGifContent = (text, sender_psid) => {
 	return new Promise(async (resolve, reject) => {
@@ -581,10 +650,71 @@ let sendGifContent = (text, sender_psid) => {
 				text: "Bạn chờ Sim 1 xíu nha ...",
 			};
 			let response2 = await getGifUrl(text);
+			let response3 = {
+				text: "Thêm nữa không bạn hiền =3",
+				quick_replies: [
+					{
+						content_type: "text",
+						title: "anime",
+						payload: "GIF_ANIME",
+					},
+					{
+						content_type: "text",
+						title: "action",
+						payload: "GIF_ACTION",
+					},
+					{
+						content_type: "text",
+						title: "funny",
+						payload: "GIF_FUNNY",
+					},
+					{
+						content_type: "text",
+						title: "fail",
+						payload: "GIF_FAIL",
+					},
+					{
+						content_type: "text",
+						title: "like-a-boss",
+						payload: "GIF_LIKE_A_BOSS",
+					},
+					{
+						content_type: "text",
+						title: "dank-memes",
+						payload: "GIF_DARK_MEMES",
+					},
+					{
+						content_type: "text",
+						title: "memes",
+						payload: "GIF_MEMES",
+					},
+					{
+						content_type: "text",
+						title: "loop",
+						payload: "GIF_LOOP",
+					},
+					{
+						content_type: "text",
+						title: "animals",
+						payload: "GIF_ANIMALS",
+					},
+					{
+						content_type: "text",
+						title: "pixel",
+						payload: "GIF_PIXEL",
+					},
+					{
+						content_type: "text",
+						title: "timelapse",
+						payload: "GIF_TIMELAPSE",
+					},
+				],
+			};
 
 			//send generic template message
 			await callSendAPI(sender_psid, response1);
 			await callSendAPI(sender_psid, response2);
+			await callSendAPI(sender_psid, response3);
 
 			resolve("done");
 		} catch (e) {
