@@ -786,7 +786,6 @@ let getMp3Link = async (link) => {
 				attachment: {
 					type: "audio",
 					payload: {
-						is_reusable: true,
 						url: data.mp3_link[0],
 					},
 				},
