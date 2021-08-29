@@ -120,7 +120,7 @@ async function handleMessage(sender_psid, received_message) {
 	if (received_message.text) {
 		let message = received_message.text;
 		let match = message.match(regExp);
-		if (match && match[2] == 11) {
+		if (match[2] == 11) {
 			await chatbotServices.sendMp3Link(message, sender_psid);
 		} else if (message === "/wjbu") {
 			await chatbotServices.sendWjbuTemplate(sender_psid);
