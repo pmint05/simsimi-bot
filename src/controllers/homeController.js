@@ -4,8 +4,17 @@ import chatbotServices from "../services/chatbotServices";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-let regExp =
-	/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+// let regExp =
+// 	/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+
+function matchYoutubeUrl(url) {
+	var p =
+		/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+	if (url.match(p)) {
+		return true;
+	}
+	return false;
+}
 
 let callSendAPI = async (sender_psid, response) => {
 	// Construct the message body
@@ -119,8 +128,7 @@ async function handleMessage(sender_psid, received_message) {
 	// Checks if the message contains text
 	if (received_message.text) {
 		let message = received_message.text;
-		let match = message.match(regExp);
-		if (match[2] == 11) {
+		if (matchYoutubeUrl(message)) {
 			await chatbotServices.sendMp3Link(message, sender_psid);
 		} else if (message === "/wjbu") {
 			await chatbotServices.sendWjbuTemplate(sender_psid);
