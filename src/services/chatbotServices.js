@@ -762,6 +762,38 @@ let getHelpTemplate = () => {
 	//\n• /nsfw: Content 18+ 🔞.
 	return response;
 };
+let sendMp3Link = (link, sender_psid) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			let response = await getMp3Link(link);
+
+			//send generic template message
+			await callSendAPI(sender_psid, response);
+
+			resolve("done");
+		} catch (e) {
+			reject(e);
+		}
+	});
+};
+let getMp3Link = async (link) => {
+	let url = `https://ytdl-pmint05.herokuapp.com/mp3link?videoUrl=${link}`;
+	let response;
+	await fetch(url)
+		.then((res) => res.json())
+		.then((data) => {
+			response = {
+				attachment: {
+					type: "audio",
+					payload: {
+						is_reusable: true,
+						url: data.mp3_link[0],
+					},
+				},
+			};
+		});
+	return response;
+};
 module.exports = {
 	handleGetStarted: handleGetStarted,
 	callSendAPI: callSendAPI,
@@ -778,4 +810,5 @@ module.exports = {
 	sendGifTemplate: sendGifTemplate,
 	sendGifContent: sendGifContent,
 	sendHelpTemplate: sendHelpTemplate,
+	sendMp3Link: sendMp3Link,
 };

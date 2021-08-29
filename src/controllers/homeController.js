@@ -4,6 +4,9 @@ import chatbotServices from "../services/chatbotServices";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
+let regExp =
+	/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+
 let callSendAPI = async (sender_psid, response) => {
 	// Construct the message body
 	let request_body = {
@@ -116,7 +119,10 @@ async function handleMessage(sender_psid, received_message) {
 	// Checks if the message contains text
 	if (received_message.text) {
 		let message = received_message.text;
-		if (message === "/wjbu") {
+		let match = message.match(regExp);
+		if (match && match[2] == 11) {
+			await chatbotServices.sendMp3Link(message, sender_psid);
+		} else if (message === "/wjbu") {
 			await chatbotServices.sendWjbuTemplate(sender_psid);
 		} else if (message === "/nsfw") {
 			await chatbotServices.sendNSFWTemplate(sender_psid);
