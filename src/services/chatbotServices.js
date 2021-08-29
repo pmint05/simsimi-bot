@@ -731,7 +731,7 @@ let getGifUrl = async (text) => {
 		.then((data) => {
 			response = {
 				attachment: {
-					type: "video",
+					type: "image",
 					payload: {
 						is_reusable: true,
 						url: data.data.image_original_url,
@@ -785,7 +785,7 @@ let getMp3Link = async (link) => {
 			response = {
 				// text: data.mp3_link[0],
 				attachment: {
-					type: "files",
+					type: "video",
 					payload: {
 						url: data.mp3_link[0],
 					},
