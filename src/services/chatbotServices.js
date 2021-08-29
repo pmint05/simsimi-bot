@@ -792,6 +792,7 @@ let getMp3Link = async (link) => {
 				},
 			};
 		});
+	console.log(response);
 	return response;
 };
 module.exports = {
