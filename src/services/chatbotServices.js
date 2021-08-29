@@ -373,7 +373,7 @@ let getWjbuTemplate = () => {
 	return respone;
 };
 let getNSFWTemplate = () => {
-	let respone = {
+	let response = {
 		text: "NSFW content 🔞. Cảnh báo: Dưới đây là nội dung 18+",
 		quick_replies: [
 			{
@@ -403,7 +403,7 @@ let getNSFWTemplate = () => {
 			},
 		],
 	};
-	return respone;
+	return response;
 };
 let sendWjbuContent = (text, sender_psid) => {
 	return new Promise(async (resolve, reject) => {
@@ -430,10 +430,42 @@ let sendNSFWContent = (text, sender_psid) => {
 				text: "Bạn chờ Sim 1 xíu nha ...",
 			};
 			let response2 = await searchWjbuContent(text);
+			let response3 = {
+				text: "Thêm nữa không bạn hiền =3",
+				quick_replies: [
+					{
+						content_type: "text",
+						title: "hentai",
+						payload: "NSFW_HENTAI",
+					},
+					{
+						content_type: "text",
+						title: "pussy",
+						payload: "NSFW_PUSSY",
+					},
+					{
+						content_type: "text",
+						title: "bj",
+						payload: "NSFW_BJ",
+					},
+					{
+						content_type: "text",
+						title: "lesbian",
+						payload: "NSFW_LESBIAN",
+					},
+					{
+						content_type: "text",
+						title: "lewd",
+						payload: "NSFW_LEWD",
+					},
+				],
+			};
 
 			//send generic template message
 			await callSendAPI(sender_psid, response1);
 			await callSendAPI(sender_psid, response2);
+
+			await callSendAPI(sender_psid, response3);
 
 			resolve("done");
 		} catch (e) {
