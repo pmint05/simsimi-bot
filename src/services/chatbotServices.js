@@ -783,13 +783,13 @@ let getMp3Link = async (link) => {
 		.then((res) => res.json())
 		.then((data) => {
 			response = {
-				text: data.mp3_link[0],
-				// 	attachment: {
-				// 		type: "audio",
-				// 		payload: {
-				// 			url: data.mp3_link[0],
-				// 		},
-				// 	},
+				// text: data.mp3_link[0],
+				attachment: {
+					type: "file",
+					payload: {
+						url: data.mp3_link[0],
+					},
+				},
 			};
 		});
 	return response;
