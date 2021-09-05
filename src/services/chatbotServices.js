@@ -554,6 +554,7 @@ let searchWjbuContent = async (message) => {
 	await fetch(url)
 		.then((res) => res.json())
 		.then((data) => {
+			data = JSON.parse(data);
 			response = {
 				attachment: {
 					type: "image",
