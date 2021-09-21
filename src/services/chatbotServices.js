@@ -182,7 +182,7 @@ let handleGetStarted = (sender_psid) => {
 };
 let reply = async (message) => {
 	// https://api.simsimi.net/v2/?text=hello&lc=en&cf=false
-	let url = new URL(`https://api.simsimi.net/v2/?text=${message}&lc=vi_VN`);
+	let url = new URL(`https://api.simsimi.net/v2/?text=${message}&lc=vn`);
 
 	const options = {
 		method: "GET",
