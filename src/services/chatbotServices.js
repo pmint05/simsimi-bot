@@ -553,7 +553,7 @@ let searchWjbuContent = async (message) => {
 	// };
 	let response;
 	await fetch(url)
-		.then((res) => res.json())
+		.then((res) => res.text())
 		.then((data) => {
 			console.log(data);
 			// response = {
