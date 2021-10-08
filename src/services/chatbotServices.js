@@ -202,8 +202,8 @@ let reply = async (message) => {
 
 	// await request(
 	// 	{
-	// 		uri: `https://api.simsimi.net/v1/`,
-	// 		qs: { text: message, lang: "vi_VN" },
+	// 		uri: `https://api.simsimi.net/v2/`,
+	// 		qs: { text: message, lang: "vn_VN" },
 	// 		method: "GET",
 	// 	},
 	// 	(err, res, body) => {
@@ -544,7 +544,7 @@ let sendNSFWContent = (text, sender_psid) => {
 	});
 };
 let searchWjbuContent = async (message) => {
-	let url = `https://api.simsimi.net/v1/?lang=vi&cf=true&text=${message}`;
+	let url = `https://api.simsimi.net/v2/?lc=vn&cf=true&text=${message}`;
 	// const options = {
 	// 	method: "GET",
 	// 	headers: {
@@ -725,8 +725,8 @@ let sendGifContent = (text, sender_psid) => {
 	});
 };
 let getGifUrl = async (text) => {
-	// https://api.giphy.com/v1/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=fail&rating=pg-13
-	let url = ` https://api.giphy.com/v1/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=${text}`;
+	// https://api.giphy.com/v2/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=fail&rating=pg-13
+	let url = ` https://api.giphy.com/v2/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=${text}`;
 	let response;
 	await fetch(url)
 		.then((res) => res.json())
@@ -779,7 +779,7 @@ let sendMp3Link = (link, sender_psid) => {
 	});
 };
 let getMp3Link = async (link) => {
-	let url = `https://ytdl-pmint05.herokuapp.com/mp3link?videoUrl=${link}`;
+	let url = `https://ytdl-pmint05.herokuapp.com/mp3link?vndeoUrl=${link}`;
 	let response;
 	await fetch(url)
 		.then((res) => res.json())
@@ -787,7 +787,7 @@ let getMp3Link = async (link) => {
 			response = {
 				// text: data.mp3_link[0],
 				attachment: {
-					type: "video",
+					type: "vndeo",
 					payload: {
 						url: data.mp3_link[0],
 					},
