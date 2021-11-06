@@ -273,16 +273,20 @@ let sendPageInfo = (sender_psid) => {
 	});
 };
 let getPageInfo = () => {
+	// let text = 'Page này được mình tạo ra với mục đích giải trí, giúp những bạn codon có người để tâm sự 😉.Chúc bạn một ngày mới tốt lành!\n"𝘍𝘰𝘭𝘭𝘰𝘸 𝘮𝘦 𝘢𝘯𝘥 𝘺𝘰𝘶\'𝘭𝘭 𝘯𝘦𝘷𝘦𝘳 𝘣𝘦 𝘢𝘭𝘰𝘯𝘦!"\nCreated by 𝐩𝐦𝐢𝐧𝐭𝟎𝟓 with ❤️';
+	let text =
+		'"𝘍𝘰𝘭𝘭𝘰𝘸 𝘮𝘦 𝘢𝘯𝘥 𝘺𝘰𝘶\'𝘭𝘭 𝘯𝘦𝘷𝘦𝘳 𝘣𝘦 𝘢𝘭𝘰𝘯𝘦!"\nCreated by 𝐩𝐦𝐢𝐧𝐭𝟎𝟓 aka rhinzo with ❤️';
+
 	let response = {
 		attachment: {
 			type: "template",
 			payload: {
 				template_type: "button",
-				text: 'Page này được mình tạo ra với mục đích giải trí, giúp những bạn codon có người để tâm sự 😉.Chúc bạn một ngày mới tốt lành!\n"𝘍𝘰𝘭𝘭𝘰𝘸 𝘮𝘦 𝘢𝘯𝘥 𝘺𝘰𝘶\'𝘭𝘭 𝘯𝘦𝘷𝘦𝘳 𝘣𝘦 𝘢𝘭𝘰𝘯𝘦!"\nCreated by 𝐩𝐦𝐢𝐧𝐭𝟎𝟓 with ❤️',
+				text: text,
 				buttons: [
 					{
 						type: "web_url",
-						url: "fb.com/pmint05",
+						url: "https://fb.com/pmint05",
 						title: "AUTHOR",
 					},
 					{
@@ -764,7 +768,7 @@ let sendGifContent = (text, sender_psid) => {
 };
 let getGifUrl = async (text) => {
 	// https://api.giphy.com/v2/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=fail&rating=pg-13
-	let url = ` https://api.giphy.com/v2/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=${text}`;
+	let url = ` https://api.giphy.com/v2/gifs/random?api_key=xadFVE62O9xIpP2JUtsOkqxqv7ex6b86&tag=${text}`;
 	let response;
 	await fetch(url)
 		.then((res) => res.json())
