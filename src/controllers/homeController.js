@@ -272,7 +272,7 @@ let setupPersistentMenu = async (req, res) => {
 					},
 					{
 						type: "postback",
-						title: "Khởi động lại bot",
+						title: "Restart bot!",
 						payload: "RESTART_CHATBOT",
 					},
 				],

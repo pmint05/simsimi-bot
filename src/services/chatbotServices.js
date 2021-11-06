@@ -120,6 +120,34 @@ let getUserName = (sender_psid) => {
 	});
 };
 let getStartTemplate = (username) => {
+	// let response = {
+	// 	attachment: {
+	// 		type: "template",
+	// 		payload: {
+	// 			template_type: "generic",
+	// 			elements: [
+	// 				{
+	// 					title: `Chào mừng ${username} đã đến với Crazy Simsimi!🥰`,
+	// 					subtitle:
+	// 						"Crazy Simsimi được tạo ra với mục đích giải trí và thay thế cho Crush của bạn =))",
+	// 					image_url: IMAGE_GET_STARTED,
+	// 					buttons: [
+	// 						{
+	// 							type: "postback",
+	// 							title: "ABOUT PAGE",
+	// 							payload: "ABOUT_PAGE",
+	// 						},
+	// 						{
+	// 							type: "postback",
+	// 							title: "/help",
+	// 							payload: "HELP",
+	// 						},
+	// 					],
+	// 				},
+	// 			],
+	// 		},
+	// 	},
+	// };
 	let response = {
 		attachment: {
 			type: "template",
@@ -127,9 +155,9 @@ let getStartTemplate = (username) => {
 				template_type: "generic",
 				elements: [
 					{
-						title: `Chào mừng ${username} đã đến với Crazy Simsimi!🥰`,
+						title: `Welcome ${username} to Crazy Simsimi!🥰`,
 						subtitle:
-							"Crazy Simsimi được tạo ra với mục đích giải trí và thay thế cho Crush của bạn =))",
+							"Crazy Simsimi is created for entertainment purposes only. Have a nice day=))",
 						image_url: IMAGE_GET_STARTED,
 						buttons: [
 							{
@@ -151,12 +179,22 @@ let getStartTemplate = (username) => {
 	return response;
 };
 let getQuickStart = () => {
+	// let response = {
+	// 	text: "Hãy nói xin chào với Simsimi nào 👋",
+	// 	quick_replies: [
+	// 		{
+	// 			content_type: "text",
+	// 			title: "Chào Simsimi",
+	// 			payload: "",
+	// 		},
+	// 	],
+	// };
 	let response = {
-		text: "Hãy nói xin chào với Simsimi nào 👋",
+		text: "Let say Hello 👋",
 		quick_replies: [
 			{
 				content_type: "text",
-				title: "Chào Simsimi",
+				title: "Hello Simsimi",
 				payload: "",
 			},
 		],
@@ -182,7 +220,7 @@ let handleGetStarted = (sender_psid) => {
 };
 let reply = async (message) => {
 	// https://api.simsimi.net/v2/?text=hello&lc=en&cf=false
-	let url = new URL(`https://api.simsimi.net/v2/?text=${message}&lc=vn`);
+	let url = new URL(`https://api.simsimi.net/v2/?text=${message}&lc=en`);
 
 	const options = {
 		method: "GET",
@@ -584,7 +622,7 @@ let sendGifTemplate = (sender_psid) => {
 };
 let getGifTemplate = () => {
 	let response = {
-		text: "GIF content 😙. Dưới đây là các lựa chọn cho bạn:",
+		text: "GIF content 😙. Please choose a tag/category:",
 		quick_replies: [
 			{
 				content_type: "text",
@@ -653,7 +691,7 @@ let sendGifContent = (text, sender_psid) => {
 			};
 			let response2 = await getGifUrl(text);
 			let response3 = {
-				text: "Thêm nữa không bạn hiền =3",
+				text: "Once more? =3",
 				quick_replies: [
 					{
 						content_type: "text",
@@ -758,8 +796,11 @@ let sendHelpTemplate = (sender_psid) => {
 	});
 };
 let getHelpTemplate = () => {
+	// let response = {
+	// 	text: "Một số câu lệnh chính:\n• /help: Simsimi sẽ gửi cho bạn đống tin nhắn này.\n• /gif: Sim sẽ gửi gif ngẫu nhiên với tag mà bạn chọn.\n• /wjbu: Gif hoặc ảnh cho mấy bạn wjbu 😉.\n ... \nCác tính năng hay ho khác vẫn đang được cập nhật\n→ Note: Do lưu lượng truy cập khá lớn nên Simsimi có thể sẽ rep chậm (30s - 1p). Các bạn chịu khó đợi Simsimi rep nha. Cảm ơn các bạn đã ghé thăm CS. Yêu các bạn ❤️🥰!",
+	// };
 	let response = {
-		text: "Một số câu lệnh chính:\n• /help: Simsimi sẽ gửi cho bạn đống tin nhắn này.\n• /gif: Sim sẽ gửi gif ngẫu nhiên với tag mà bạn chọn.\n• /wjbu: Gif hoặc ảnh cho mấy bạn wjbu 😉.\n ... \nCác tính năng hay ho khác vẫn đang được cập nhật\n→ Note: Do lưu lượng truy cập khá lớn nên Simsimi có thể sẽ rep chậm (30s - 1p). Các bạn chịu khó đợi Simsimi rep nha. Cảm ơn các bạn đã ghé thăm CS. Yêu các bạn ❤️🥰!",
+		text: "Welcome to Crazy Simsimi. Currently supported languages: ᴇɴɢʟɪꜱʜ.\nMulti-language: Updating ...\nCommands:\n• /help: Send help messages\n• /gif: Simsimi will send you a random gif with the tag you selected.\n ...\n Thank you to visiting C.S. Have a nice day ❤️.",
 	};
 	//\n• /nsfw: Content 18+ 🔞.
 	return response;
