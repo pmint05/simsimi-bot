@@ -773,15 +773,16 @@ let getGifUrl = async (text) => {
 	await fetch(url)
 		.then((res) => res.json())
 		.then((data) => {
-			response = {
-				attachment: {
-					type: "image",
-					payload: {
-						is_reusable: true,
-						url: data.data.original.url,
-					},
-				},
-			};
+			console.log(data);
+			// response = {
+			// 	attachment: {
+			// 		type: "image",
+			// 		payload: {
+			// 			is_reusable: true,
+			// 			url: data.data.original.url,
+			// 		},
+			// 	},
+			// };
 		});
 	return response;
 };
