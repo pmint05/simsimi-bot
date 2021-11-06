@@ -691,7 +691,7 @@ let sendGifContent = (text, sender_psid) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			let response1 = {
-				text: "Bạn chờ Sim 1 xíu nha ...",
+				text: "Wait Sim a second ...",
 			};
 			let response2 = await getGifUrl(text);
 			let response3 = {
