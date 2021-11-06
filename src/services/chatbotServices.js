@@ -233,7 +233,7 @@ let reply = async (message) => {
 		.then((res) => res.json())
 		.then((data) => {
 			response = {
-				text: data.success,
+				"text": data.success,
 			};
 		});
 	return response;
