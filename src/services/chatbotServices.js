@@ -768,7 +768,7 @@ let sendGifContent = (text, sender_psid) => {
 };
 let getGifUrl = async (text) => {
 	// https://api.giphy.com/v2/gifs/random?api_key=0UTRbFtkMxAplrohufYco5IY74U8hOes&tag=fail&rating=pg-13
-	let url = ` https://api.giphy.com/v2/gifs/random?api_key=xadFVE62O9xIpP2JUtsOkqxqv7ex6b86&tag=${text}`;
+	let url = ` https://api.giphy.com/v1/gifs/random?api_key=xadFVE62O9xIpP2JUtsOkqxqv7ex6b86&tag=${text}`;
 	let response;
 	await fetch(url)
 		.then((res) => res.json())
