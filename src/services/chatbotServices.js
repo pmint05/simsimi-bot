@@ -778,7 +778,7 @@ let getGifUrl = async (text) => {
 					type: "image",
 					payload: {
 						is_reusable: true,
-						url: data.data.image_original_url,
+						url: data.data.original.url,
 					},
 				},
 			};
