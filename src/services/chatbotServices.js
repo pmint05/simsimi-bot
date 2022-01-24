@@ -219,6 +219,7 @@ let handleGetStarted = (sender_psid) => {
 	});
 };
 let reply = async (message) => {
+	//api
 	// https://api.simsimi.net/v2/?text=hello&lc=en&cf=false
 	let url = new URL(`https://api.simsimi.net/v2/?text=${message}&lc=en`);
 
@@ -233,7 +234,7 @@ let reply = async (message) => {
 		.then((res) => res.json())
 		.then((data) => {
 			response = {
-				"text": data.success,
+				text: data.success,
 			};
 		});
 	return response;
