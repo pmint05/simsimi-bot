@@ -1,6 +1,6 @@
 require("dotenv").config();
-import request from "request";
-import chatbotServices from "../services/chatbotServices";
+const request = require("request");
+const chatbotServices = require("../services/chatbotServices");
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
@@ -107,12 +107,12 @@ async function handleMessage(sender_psid, received_message) {
 		received_message.quick_reply.payload != ""
 	) {
 		let QR_payload = received_message.quick_reply.payload;
-		let WjbuPayload = QR_payload.search("WIBU");
+		let AnimePayload = QR_payload.search("ANIME");
 		let NSFWPayload = QR_payload.search("NSFW");
 		let GifPayload = QR_payload.search("GIF");
-		if (WjbuPayload != -1) {
+		if (AnimePayload != -1) {
 			let title = received_message.text;
-			await chatbotServices.sendWjbuContent(title, sender_psid);
+			await chatbotServices.sendAnimeContent(title, sender_psid);
 		} else if (NSFWPayload != -1) {
 			let title = received_message.text;
 			await chatbotServices.sendNSFWContent(title, sender_psid);
@@ -130,8 +130,8 @@ async function handleMessage(sender_psid, received_message) {
 		let message = received_message.text;
 		if (matchYoutubeUrl(message)) {
 			await chatbotServices.sendMp3Link(message, sender_psid);
-		} else if (message === "/wjbu") {
-			await chatbotServices.sendWjbuTemplate(sender_psid);
+		} else if (message === "/anime") {
+			await chatbotServices.sendAnimeTemplate(sender_psid);
 		} else if (message === "/nsfw") {
 			await chatbotServices.sendNSFWTemplate(sender_psid);
 		} else if (message === "/gif") {
@@ -203,8 +203,8 @@ async function handlePostback(sender_psid, received_postback) {
 		case "ABOUT_PAGE":
 			await chatbotServices.sendPageInfo(sender_psid);
 			break;
-		case "WJBU":
-			await chatbotServices.sendWjbuTemplate(sender_psid);
+		case "ANIME":
+			await chatbotServices.sendAnimeTemplate(sender_psid);
 			break;
 		case "NSFW":
 			await chatbotServices.sendNSFWTemplate(sender_psid);
@@ -261,14 +261,29 @@ let setupPersistentMenu = async (req, res) => {
 				composer_input_disabled: false,
 				call_to_actions: [
 					{
-						type: "web_url",
-						title: "AUTHOR",
-						url: "fb.com/pmint05/",
-					},
-					{
 						type: "postback",
 						title: "/help",
 						payload: "HELP",
+					},
+					{
+						type: "postback",
+						title: "/anime",
+						payload: "ANIME",
+					},
+					{
+						type: "postback",
+						title: "/gif",
+						payload: "GIF",
+					},
+					{
+						type: "postback",
+						title: "/nsfw",
+						payload: "NSFW",
+					},
+					{
+						type: "web_url",
+						title: "AUTHOR",
+						url: "fb.com/pmint05/",
 					},
 					{
 						type: "postback",

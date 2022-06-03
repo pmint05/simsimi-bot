@@ -5,7 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon --exec babel-node src/server.js"
+		"start": "nodemon --exec babel-node server.js"
 	},
 	"author": "pmint05",
 	"license": "ISC",
@@ -16,7 +16,8 @@
 		"express": "^4.17.1",
 		"node-fetch": "^2.6.1",
 		"request": "^2.88.2",
-		"utf8": "^3.0.0"
+		"utf8": "^3.0.0",
+		"ytdl-core": "^4.11.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.15.0",

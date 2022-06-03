@@ -1,5 +1,5 @@
-import express from "express";
-import homeController from "../controllers/homeController";
+const express = require("express");
+const homeController = require("../controllers/homeController");
 
 let router = express.Router();
 
